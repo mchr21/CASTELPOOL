@@ -16,13 +16,17 @@ class CategoriesController extends Component
     use WithPagination;
 
     public $name, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 5;
+    private $pagination = 2;
 
     public function mount()
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Categorías';
        // $this->search = '';
+    }
+
+    public function paginationView() {
+        return 'vendor.livewire.bootstrap';
     }
 
     public function render()
@@ -40,5 +44,15 @@ class CategoriesController extends Component
             ->section('content');
 
                 
+    }
+    public function Edit($id){
+        $record = Category::find($id);
+        $this->name = $record->name;
+        $this->selected_id = $record->id;
+        $this->image = null;
+
+        $this->dispatch('show-modal','show modal!');
+
+
     }
 }

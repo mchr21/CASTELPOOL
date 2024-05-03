@@ -36,8 +36,7 @@
                                     </td>
                                     <td class="text-center">
                                     <span>
-                                        <img src="{{ asset('storage/categories' . $category->image) }}"
-                                            alt="imagen de ejemplo" height="70" width="80" class="rounded">
+                                        <img src="">
                                     </span>
                                     </td>
                               
@@ -59,7 +58,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    Pagination
+                    {{-- Pagination --}}
+                    {{$categories->links()}}
                 </div>
 
             </div>
@@ -77,50 +77,11 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-        window.livewire.on('category-added', msg => { //registrar
-            $('#theModal').modal('hide');
-            noty(msg)
-        });
-        window.livewire.on('category-updated', msg => { //actualizar
-            $('#theModal').modal('hide')
-            noty(msg)
-        });
-        window.livewire.on('category-deleted', msg => { //eliminar
-            noty(msg)
-        });
-        window.livewire.on('hide-modal', msg => { //evento que indica ocultar la modal
-            $('#theModal').modal('hide')
-        });
-        window.livewire.on('modal-show', msg => { //evento que indica mostrar la modal
-            $('#theModal').modal('show')
-        });
-        window.livewire.on('hidden.bs.modal',
-            msg => { //evento para mostrar el mesaje "nombre categoria requerido" para mostrar y ocultar el mesaje "nombre categoria requerido" al  volver a abrir desaparezca
-                $('.er').css('display', 'none')
-            });
+       
 
     });
 
 
 
-    function Confirm(id) //confirmar eliminar registro 
-    {
-
-        swal({
-            title: 'CONFIRMAR',
-            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'Cerrar',
-            cancelButtonColor: '#fff',
-            confirmButtonColor: '#3B3F5C',
-            confirmButtonText: 'Aceptar'
-        }).then(function(result) {
-            if (result.value) {
-                window.livewire.emit('deleteRow', id)
-                swal.close()
-            }
-
-        })
-    }
+   
 </script>
