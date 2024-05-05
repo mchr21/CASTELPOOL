@@ -35,23 +35,31 @@
                                         <h6>{{ $category->name }}</h6>
                                     </td>
                                     <td class="text-center">
-                                    <span>
-                                        <img src="">
+                                     <span>
+                                        <img src="{{ asset('storage/categories/' . $category->imagen) }}"
+                                        alt="imagen de ejemplo" height="70" width="80" class="rounded">
                                     </span>
                                     </td>
                               
 
                                     <td class="text-center">
                                         <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})"
-                                            class="btn btn-dark mtmobile" title="Edit">
+                                            class="btn btn-dark mtmobile" title="Edit" >
                                             <i class="fas fa-edit"></i>
                                         </a>
 
-                                        <a href="javascript:void(0)" onclick="confirm('{{ $category->id }}')"
+
+                                       @if($category->products->count() < 1)
+                                        
+                                        <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}', '{{$category->products->count()}} ')"
                                             class="btn btn-dark" title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </a>
+                                        
+                                       @endif
+                                       {{-- {{$category->products->count()}} 
 
+                                        {{$category->Imagen}} --}}
 
                                     </td>
                                 </tr>
@@ -75,13 +83,65 @@
 
 
 <script>
+    
     document.addEventListener('DOMContentLoaded', function() {
 
+        // --------------AQUI ESTABA BLOQUENDO LA PALABRA window.livewire.on cambie por window.Livewire.on
+        // window.livewire.on('show-modal', msg =>{
+		// 	$('#theModal').modal('show')
+		// });
        
+        // --------------ESTA FUNCIONA DE OTRA MANERA
+            // document.addEventListener('DOMContentLoaded', function() {
+            //     Livewire.on('show-modal', (data) => {
+            //         $('#theModal').modal('show');
+            //         console.log(data.message); // Accede a los datos enviados con el evento
+            //     });
+            // });/
 
+
+            window.Livewire.on('show-modal', msg =>{
+			$('#theModal').modal('show')
+		});
+
+
+            window.Livewire.on('category-added', msg => {
+            $('#theModal').modal('hide')
+        });
+
+        window.Livewire.on('category-updated', msg =>{
+			$('#theModal').modal('hide')
+		});
+
+        
     });
 
 
+    function Confirm(id, products)
+	{	
+        if(products > 0)
+        {
+            swal('NO SE PUEDE ELIMINAR LA CATEGORIA PORQUE TIENE PRODUCTOS RELACIONADOS')
+            return;
+        }
+
+		swal({
+			title: 'CONFIRMAR',
+			text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+			type: 'warning',
+			showCancelButton: true,
+			cancelButtonText: 'Cerrar',
+			cancelButtonColor: '#fff',
+			confirmButtonColor: '#3B3F5C',
+			confirmButtonText: 'Aceptar'
+		}).then(function(result) {
+			if(result.value){
+				window.Livewire.dispatch('deleteRow', [id])
+				swal.close()
+			}
+
+		})
+	}
 
    
 </script>
