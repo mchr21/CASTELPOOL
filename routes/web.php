@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\CategoriesController;
-
+use App\Livewire\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +24,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('categories', CategoriesController::class);
+Route::get('products', ProductsController::class);

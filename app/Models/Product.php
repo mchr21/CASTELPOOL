@@ -15,4 +15,16 @@ class Product extends Model
 	{
 		return $this->belongsTo(Category::class);
 	}
+
+
+
+
+    public function getImagenAttribute()
+	{	
+		if($this->image != null)
+			return (file_exists('storage/products/' . $this->image) ? $this->image : 'noimg.jpg');
+		else
+			return 'noimg.jpg';		
+		
+	}
 }

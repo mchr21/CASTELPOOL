@@ -5,7 +5,7 @@
                 <a href="index.html">
                     <img src="assets/img/logo3.png" class="navbar-logo" alt="logo" >
                     
-                    <b style="font-size: 19px; color:brown">CASTEL POOL</b>
+                    <b style="font-size: 19px; color:rgb(49, 45, 71)">BILLARD</b>
                 </a>
             </li>
         </ul>

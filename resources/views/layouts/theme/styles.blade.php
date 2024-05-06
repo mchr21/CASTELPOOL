@@ -67,5 +67,17 @@
     box-shadow: none;
     border-radius: 30px;
 }
+
+.navbar .navbar-item .nav-item.search-animated svg {
+    cursor: pointer;
+    color: #ffffffb4!important;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+}
+
+
 </style>
 @livewireStyles

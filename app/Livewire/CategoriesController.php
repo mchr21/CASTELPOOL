@@ -12,8 +12,8 @@ use Livewire\WithPagination;
 class CategoriesController extends Component
 {
 
-    use WithFileUploads;
-    use WithPagination;
+    use WithFileUploads; //para subir imagenes o archivos
+    use WithPagination; //paginacion de componentes
 
     public $name, $search, $image, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
