@@ -9,4 +9,17 @@ class Denomination extends Model
 {
     use HasFactory;
     protected $fillable = ['type','value','image'];
+    
+	public function getImagenAttribute()
+	{
+
+
+		if($this->image != null)
+			return (file_exists('storage/denominations/' . $this->image) ? 'denominations/' . $this->image : 'noimg.jpg');
+		else
+			return 'noimg.jpg';	
+		
+		
+	}
+    
 }
