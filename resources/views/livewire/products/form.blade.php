@@ -4,8 +4,8 @@
 	
 <div class="col-sm-12 col-md-8">
 	<div class="form-group">
-		<label >Nombre</label>
-		<input type="text" wire:model.lazy="name" 
+		<label for="inputNombre">Nombre</label>
+		<input id="inputNombre"type="text" wire:model.lazy="name" 
 		class="form-control" placeholder="ej: Curso Laravel" autofocus >
 		{{-- class="form-control product-name" placeholder="ej: Curso Laravel" autofocus > --}}
 		@error('name') <span class="text-danger er">{{ $message}}</span>@enderror
@@ -14,8 +14,8 @@
 
 <div class="col-sm-12 col-md-4">
 	<div class="form-group">
-		<label >Código</label>
-		<input type="text" wire:model.lazy="barcode" 
+		<label for="inputCodigo">Código</label>
+		<input id="inputCodigo" type="text" wire:model.lazy="barcode" 
 		class="form-control"
 		{{-- {{ $selected_id > 0 ? 'disabled' : '' }} 		 --}}
 		placeholder="ej: 025974" >
@@ -25,8 +25,8 @@
 
 <div class="col-sm-12 col-md-4">
 	<div class="form-group">
-		<label >Costo</label>
-		<input type="text" data-type='currency' wire:model.lazy="cost" class="form-control" placeholder="ej: 0.00" >
+		<label for="inputCosto">Costo</label>
+		<input id="inputCosto"type="text" data-type='currency' wire:model.lazy="cost" class="form-control" placeholder="ej: 0.00" >
            {{--  //////data-type='currency' porque el type es texto asi que llamamos a ese plugin para que solo ingrese valores nummericos --}}
 
 		@error('cost') <span class="text-danger er">{{ $message}}</span>@enderror
@@ -35,24 +35,24 @@
 
 <div class="col-sm-12 col-md-4">
 	<div class="form-group">
-		<label >Precio</label>
-           <input type="text" data-type='currency' wire:model.lazy="price" class="form-control" placeholder="ej: 0.00" > 
+		<label for="inputPrecio" >Precio</label>
+           <input id="inputPrecio" type="text" data-type='currency' wire:model.lazy="price" class="form-control" placeholder="ej: 0.00" > 
 		@error('price') <span class="text-danger er">{{ $message}}</span>@enderror
 	</div>
 </div>
 
 <div class="col-sm-12 col-md-4">
 	<div class="form-group">
-		<label >Stock</label>
-		<input type="number"  wire:model.lazy="stock" class="form-control" placeholder="ej: 0" >
+		<label for="inputStock">Stock</label>
+		<input id="inputStock"type="number"  wire:model.lazy="stock" class="form-control" placeholder="ej: 0" >
 		@error('stock') <span class="text-danger er">{{ $message}}</span>@enderror
 	</div>
 </div>
 
 <div class="col-sm-12 col-md-4">
 	<div class="form-group">
-		<label >Alertas</label>
-		<input type="number"  wire:model.lazy="alerts" class="form-control" placeholder="ej: 10" >
+		<label for="inputAlert">Alertas</label>
+		<input id="inputAlert"type="number"  wire:model.lazy="alerts" class="form-control" placeholder="ej: 10" >
 		@error('alerts') <span class="text-danger er">{{ $message}}</span>@enderror
 	</div>
 </div>
@@ -60,8 +60,8 @@
 
 <div class="col-sm-12 col-md-4">
 <div class="form-group">
-	<label>Categoría</label>
-	<select wire:model='categoryid' class="form-control">
+	<label for="categoriaSelect" >Categoría</label>
+	<select id="categoriaSelect" wire:model='categoryid' class="form-control">
 		<option value="Elegir" disabled>Elegir</option>
 		@foreach($categories as $category)
 		<option value="{{$category->id}}" >{{$category->name}}</option>
@@ -75,10 +75,10 @@
 
 <div class="col-sm-12 col-md-8">
 <div class="form-group custom-file">
-	<input type="file" class="custom-file-input form-control" wire:model="image"
+	<input id="fileInput"  type="file" class="custom-file-input form-control" wire:model="image"
 	accept="image/x-png, image/gif, image/jpeg"  
 	 >
-	 <label class="custom-file-label">Imágen {{$image}}</label>
+	 <label for="fileInput"class="custom-file-label">Imágen {{$image}}</label>
 	 @error('image') <span class="text-danger er">{{ $message}}</span>@enderror
 </div>
 </div>

@@ -35,7 +35,9 @@ class CoinsController extends Component
     	if(strlen($this->search) > 0)
     		$data = Denomination::where('type', 'like', '%' . $this->search . '%')->paginate($this->pagination);
     	else
-    		$data = Denomination::orderBy('id','desc')->paginate($this->pagination);
+    		$data = Denomination::orderBy('id','asc')->paginate($this->pagination);
+		
+		
 
 
 
