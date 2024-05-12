@@ -28,16 +28,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- {{dd($cart)}} --}}
                                 @foreach ($cart as $item)
                                     <tr>
+                                     
                                         <td class="text-center table-th">
-                                            @if (count($item->attributes) > 0)
+                                            {{-- @if (count($item->attributes) > 0 && isset($item->attributes[0])) --}}
+                                            @if (count($item->attributes) > 0 && isset($item->attributes[0])) 
+                                             
                                                 <span>
-                                                    <img src="{{ asset('storage/products/' . $item->attributes[0]) }}"
-                                                        alt="imágen de producto" height="90" width="90"
-                                                        class="rounded">
-                                                </span>
+                                                    <img src="{{ asset('storage/products/' . $item->attributes[0])}}" alt="Imagen Del Producto" height="90" width="90" class="rounded">
+                                                </span>	
+                                                                                			
+                                    
                                             @endif
+                                              
                                         </td>
                                         <td>
                                             <h6>{{ $item->name }}</h6>
@@ -54,10 +59,12 @@
                                         </td>
                                         <td class="text-center">
                                             <button
-                                                onclick="Confirm('{{ $item->id }}', 'removeItem', '¿CONFIRMAS ELIMINAR EL REGISTRO?')"
+                                                onclick="Confirm('{{ 10 }}', 'removeItem', '¿CONFIRMAS ELIMINAR EL REGISTRO?')"
                                                 class="btn btn-dark mbmobile">
                                                 <i class="fas fa-trash-alt"></i>
+                                                {{-- {{dd($item->id) }} --}}
                                             </button>
+                                            
                                             <button wire:click.prevent="decreaseQty({{ $item->id }})"
                                                 class="btn btn-dark mbmobile">
                                                 <i class="fas fa-minus"></i>

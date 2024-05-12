@@ -9,6 +9,7 @@ use App\Models\Sale;
 use App\Models\SaleDetail;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Exception;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
@@ -22,10 +23,11 @@ class PosController extends Component
     {
         $this->efectivo = 0;
         $this->change = 0;
-        //otener el total del carrito
+        //otener el total del carrito//
         $this->total  = Cart::getTotal();
-        //obtener cantidad de productos agredados al carrito
+        //obtener cantidad de productos agredados al carrito//
         $this->itemsQuantity = Cart::getTotalQuantity();
+        
     }
 
     //===========2==========
@@ -36,7 +38,7 @@ class PosController extends Component
             'cart' => Cart::getContent()->sortBy('name')
         ])
             ->extends('layouts.theme.app')
-            ->section('content');;
+            ->section('content');
     }
     //===========3==========
     // agregar efectivo / denominations
@@ -53,7 +55,7 @@ class PosController extends Component
         'scan-code'  =>  'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart'  => 'clearCart',
-        'saveSale'   => 'saveSale',
+        'saveSale'   => 'saveSale'
     ];
 
     //metodo que se encarga de recibir el cod de barras y lo busca en base de datos para agregar al carrito  en caso de exitir lo actualiza
@@ -64,8 +66,7 @@ class PosController extends Component
         $product = Product::where('barcode', $barcode)->first(); //retorna el pr1mer elemento encontrado el la bd
 
         if ($product == null || empty($product))  //validamos si el producto es encontrado prod == 0 o la buqueda nos devolvio un resultado vacio
-        {
-          
+        {          
             $this->dispatch('scan-notfound', 'El producto no esta registrado');
         } else {
 
@@ -75,22 +76,21 @@ class PosController extends Component
                 //si el producto ya exite dentro del carrito le pasamos el id del producto llamamos al metodo increaseqty el id del prodcuto 
                 $this->increaseQty($product->id); //incrementamos al carrito -... si ya tiene uno entonces incrementamos a 2
                 return;
-            }
-            
-           // dd($product);
+            }            
+     
             if ($product->stock < 1) {
                 $this->dispatch('scan-stock', 'Stock insuficiente :/');
                 return;
             }
             //adicionamos el producto al carrito
-            Cart::add($product->id, $product->name, $product->price, $product->image);
-
-    //        $carro = Cart::getContent();
+         //  Cart::add(array($product->id, $product->name, $product->price, $product->image));
+         Cart::add($product->id, $product->name, $product->price,$cant, $product->image);
+    //          $carro = Cart::getContent();
     //    dd($carro);
 
             // tambien se tiene que actualizar el total con la sumatoria total del carrito 
             $this->total = Cart::getTotal();
-            $this->dispatch('scan-ok', 'producto agregado'); $this->dispatch('scan-ok', 'producto agregado');
+            $this->dispatch('scan-ok', 'producto agregado'); 
         }
        //dd($product);
         
@@ -122,7 +122,7 @@ class PosController extends Component
                 return;
             }                
         }
-        cart::add($product->id, $product->name, $product->price,$cant, $product->image);
+        Cart::add($product->id, $product->name, $product->price,$cant, $product->image);
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->dispatch('scan-ok', $title);
@@ -150,10 +150,12 @@ class PosController extends Component
             }
         }
 
-        $this->removeItem($productId);
+      $this->removeItem($productId);
+        
         if($cant > 0)
         {
-            cart::add($product->id, $product->name, $product->price,$cant, $product->image);
+            Cart::add($product->id, $product->name, $product->price,$cant, $product->image);        
+                       
             
         }
         $this->total = Cart::getTotal();
@@ -162,11 +164,16 @@ class PosController extends Component
 	}
     public function removeItem($productId)
     {
-        cart::remove($productId);
-        $this->total = Cart::getTotal();
-        $this->itemsQuantity = Cart::getTotalQuantity();
-        $this->dispatch('scan-ok', 'Producto Eliminado');
+        
+        // Cart::remove($productId);
+
+        
+        // $this->total = Cart::getTotal();
+        // $this->itemsQuantity = Cart::getTotalQuantity();
+        // $this->dispatch('scan-ok', 'Producto Eliminado');
     }
+
+
     	// decrementar cantidad item en carrito
 	public function decreaseQty($productId)
 	{
@@ -176,6 +183,7 @@ class PosController extends Component
         if($newQty > 0)
         
             Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
+
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->dispatch('scan-ok', 'Cantidad Actualizada');       
@@ -222,7 +230,9 @@ class PosController extends Component
 			]);  //hasta aqui estamos almacenando nuestra venta y le guardamos en la var $sale
 
 			if ($sale) {   //si nuestra venta se guardo
-				$items = Cart::getContent();    //recupera productos del carrito
+				$items = Cart::getContent();  
+              
+                //recupera productos del carrito
 				foreach ($items as  $item) {  //recorremos
 					SaleDetail::create([  //guardamos el detalle
 						'price' => $item->price,
@@ -249,15 +259,10 @@ class PosController extends Component
 			$this->itemsQuantity = Cart::getTotalQuantity();
 			$this->dispatch('sale-ok', 'Venta registrada con éxito');
 
-		
-        
             // $ticket = $this->buildTicket($sale);/////////////// habilitar
 			// $d = $this->Encrypt($ticket);
 
 			//$this->dispatch('print-ticket', $d);
-
-
-
 
 			$this->dispatch('print-ticket', $sale->id); /////////////////////// deshabilitar
 
@@ -267,14 +272,10 @@ class PosController extends Component
 		}
 	}
 
-
     public function printTicket($sale)
 	{
 		return Redirect::to("print://$sale->id");
 	}
-
-
     
-
 
 }
