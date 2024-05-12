@@ -28,7 +28,7 @@
 								</span>
 							</div>
 							<input type="number" id="cash"
-							wire:model="efectivo"
+							wire:model.live="efectivo"
 							wire:keydown.enter="saveSale"
 							class="form-control text-center" value="{{$efectivo}}" 							
 							>

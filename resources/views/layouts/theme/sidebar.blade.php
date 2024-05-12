@@ -179,5 +179,9 @@
     </nav>
 </div>
 
+{{-- LO SIGUIENTE ES PARA QUE NO MUESTRE EL ERROR QUE MUESTRA AL CORRER .. QUE NO HACIA NADA PERO ESTABA AHI --}}
+<div id="compact_submenuSidebar" class="submenu-sidebar" style="display: none!important">   
+</div>
+
 
 

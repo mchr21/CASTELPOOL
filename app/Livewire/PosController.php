@@ -59,29 +59,41 @@ class PosController extends Component
     //metodo que se encarga de recibir el cod de barras y lo busca en base de datos para agregar al carrito  en caso de exitir lo actualiza
     // buscar y agregar producto por escaner y/o manual
     public function ScanCode($barcode, $cant = 1)
-    {
-       // dd($barcode);
-        $product = Product::where('barcode', $barcode->first()); //retorna el promer elemento encontrado el la bd
-        if ($product == null || empty($empty))  //validamos si el producto es encontrado prod == 0 o la buqueda nos devolvio un resultado vacio
+    {              
+           // dd($barcode);
+        $product = Product::where('barcode', $barcode)->first(); //retorna el pr1mer elemento encontrado el la bd
+
+        if ($product == null || empty($product))  //validamos si el producto es encontrado prod == 0 o la buqueda nos devolvio un resultado vacio
         {
+          
             $this->dispatch('scan-notfound', 'El producto no esta registrado');
         } else {
+
             //si el producto ya exite dentro del carrito le pasamos el id del producto
             if ($this->InCart($product->id)) {
+               // dd($product);
                 //si el producto ya exite dentro del carrito le pasamos el id del producto llamamos al metodo increaseqty el id del prodcuto 
                 $this->increaseQty($product->id); //incrementamos al carrito -... si ya tiene uno entonces incrementamos a 2
                 return;
             }
-            if ($product->stok < 1) {
+            
+           // dd($product);
+            if ($product->stock < 1) {
                 $this->dispatch('scan-stock', 'Stock insuficiente :/');
                 return;
             }
             //adicionamos el producto al carrito
             Cart::add($product->id, $product->name, $product->price, $product->image);
+
+    //        $carro = Cart::getContent();
+    //    dd($carro);
+
             // tambien se tiene que actualizar el total con la sumatoria total del carrito 
             $this->total = Cart::getTotal();
             $this->dispatch('scan-ok', 'producto agregado'); $this->dispatch('scan-ok', 'producto agregado');
         }
+       //dd($product);
+        
     }
     //metodo de incart le pasamos el id// validara si el id del producto ya existe en el carrito
     public function InCart($productId)

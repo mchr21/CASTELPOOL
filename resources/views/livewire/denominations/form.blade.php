@@ -5,7 +5,7 @@
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label for="tipo">Tipo</label>
-            <select id="tipo" wire:model="type" class="form-control">
+            <select id="tipo" wire:model.live="type" class="form-control">
                 <option value="Elegir">Elegir</option>
                 <option value="BILLETE">BILLETE</option>
                 <option value="MONEDA">MONEDA</option>
@@ -23,7 +23,7 @@
                     <span class="fas fa-edit"></span>
                 </span>
             </div>
-            <input id="value" type="number" wire:model.lazy="value" class="form-control" placeholder="ej: 100.00" maxlength="25">
+            <input id="value" type="number" wire:model.blur="value" class="form-control" placeholder="ej: 100.00" maxlength="25">
         </div>
         @error('value') <span class="text-danger er">{{ $message }}</span> @enderror
     </div>

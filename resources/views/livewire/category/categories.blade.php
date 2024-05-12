@@ -81,7 +81,8 @@
     @include('livewire.category.form')
 </div>
 
-
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script> --}}
 <script>
     
     document.addEventListener('DOMContentLoaded', function() {
@@ -106,7 +107,9 @@
 
 
             window.Livewire.on('category-added', msg => {
-            $('#theModal').modal('hide')
+            $('#theModal').modal('hide') ; 
+    //         console.log('Mensaje a mostrar:', msg); // Imprimir el mensaje que se va a mostrar
+    // toastr.success(msg);
         });
 
         window.Livewire.on('category-updated', msg =>{
