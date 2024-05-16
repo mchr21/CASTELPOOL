@@ -6,7 +6,7 @@
     try{
     
         onScan.attachTo(document, {
-      //  suffixKeyCodes: [13],//13 es la pulsacion de la tecla enter
+       suffixKeyCodes: [13],//13 es la pulsacion de la tecla enter
         onScan: function(barcode) { //definomos dos fuciones collback una para definir la lectura de codigo de barras
             console.log(barcode) //lee el codigo de barras
             window.Livewire.dispatch('scan-code', barcode)//emitimos el evento con js para poder capturar en el backent y buscar el cod de barras en la bd para posteriormente agregarloa a la grillla de eventos

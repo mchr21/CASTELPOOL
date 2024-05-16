@@ -20,7 +20,8 @@
 <script>
     function noty(msg, option = 1) {
         Snackbar.show({
-            text: msg.toUpperCase(),
+          //  text: msg.toUpperCase(),
+            text: msg.toString().toUpperCase(),
             actionText: 'CERRAR',
             actionTextColor: '#fff',
             backgroundColor: option == 1 ? '#3b3f5c' : '#e7515a',

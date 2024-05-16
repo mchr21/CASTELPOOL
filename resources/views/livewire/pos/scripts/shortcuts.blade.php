@@ -22,6 +22,7 @@
 		var total = parseFloat(document.getElementById('hiddenTotal').value)	//validamos que tenga un total	
 		if(total > 0) {
 			Confirm(0, 'clearCart', '¿SEGUR@ DE ELIMINAR EL CARRITO?') //primero el id de producto a eliminar , ninguno por eso 0, el segundo parametro es el evento que vamos a emitir y el tercero el msj
+		
 		} else 
 		{
 			noty('AGREGA PRODUCTOS A LA VENTA')

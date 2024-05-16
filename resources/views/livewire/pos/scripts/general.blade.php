@@ -49,7 +49,7 @@
 			confirmButtonText: 'Aceptar'
 		}).then(function(result) {
 			if (result.value) {
-				window.Livewire.dispatch(eventName, id)
+				window.Livewire.dispatch(eventName, [id])
 				swal.close()
 			}
 

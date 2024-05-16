@@ -37,15 +37,32 @@ class PosController extends Component
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name')
         ])
-            ->extends('layouts.theme.app')
-            ->section('content');
+        ->extends('layouts.theme.app')
+        ->section('content');
     }
     //===========3==========
     // agregar efectivo / denominations
-    public function ACash($value)
-    {
-        $this->efectivo += ($value == 0 ? $this->total : $value);
-        $this->change = ($this->efectivo - $this->total);
+    public function ACash($value)    {
+          
+
+         //   $this->efectivo += ($value == 0 ? $this->total : $value);
+
+if($value == 0 ){
+    $this->efectivo =  $this->total;
+    $this->change = 0;
+    
+}else{
+    $this->efectivo +=  $value;
+    $this->change = ($this->efectivo - $this->total);
+   // dd($this->change);
+
+}
+
+
+
+            
+        //    dd($this->change);
+      
     }
     //===========5 listeners==========
 
@@ -55,7 +72,9 @@ class PosController extends Component
         'scan-code'  =>  'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart'  => 'clearCart',
-        'saveSale'   => 'saveSale'
+        'saveSale'   => 'saveSale',
+        'clearCoins'   => 'clearCoins'
+
     ];
 
     //metodo que se encarga de recibir el cod de barras y lo busca en base de datos para agregar al carrito  en caso de exitir lo actualiza
@@ -79,7 +98,7 @@ class PosController extends Component
             }            
      
             if ($product->stock < 1) {
-                $this->dispatch('scan-stock', 'Stock insuficiente :/');
+                $this->dispatch('no-stock', 'Stock insuficiente :/');
                 return;
             }
             //adicionamos el producto al carrito
@@ -122,12 +141,13 @@ class PosController extends Component
                 return;
             }                
         }
+        // cuando se usa el metodo add internamente valida si el producto existe
+        //si no exite lo crea y si exite lo actualiza la cantidad
         Cart::add($product->id, $product->name, $product->price,$cant, $product->image);
         $this->total = Cart::getTotal();
-        $this->itemsQuantity = Cart::getTotalQuantity();
+        $this->itemsQuantity = Cart::getTotalQuantity(); //muestra el total de productos 
         $this->dispatch('scan-ok', $title);
-
-    }
+        }
 
     // actualizar cantidad item en carrito
     //remplazara la informacion completa dentro del carrito
@@ -149,30 +169,27 @@ class PosController extends Component
                 return;
             }
         }
-
+        //aqui no solo actualizaremos la cantidad sino
+//removemos el carrito para luego volver a insertar nuevamente
       $this->removeItem($productId);
         
         if($cant > 0)
         {
-            Cart::add($product->id, $product->name, $product->price,$cant, $product->image);        
-                       
-            
+            Cart::add($product->id, $product->name, $product->price,$cant, $product->image);                          
         }
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->dispatch('scan-ok', $title);
 	}
+
+
     public function removeItem($productId)
-    {
-        
-        // Cart::remove($productId);
-
-        
-        // $this->total = Cart::getTotal();
-        // $this->itemsQuantity = Cart::getTotalQuantity();
-        // $this->dispatch('scan-ok', 'Producto Eliminado');
+    {        
+        Cart::remove($productId);        
+        $this->total = Cart::getTotal();
+        $this->itemsQuantity = Cart::getTotalQuantity();
+        $this->dispatch('scan-ok', 'Producto Eliminado');
     }
-
 
     	// decrementar cantidad item en carrito
 	public function decreaseQty($productId)
@@ -180,14 +197,14 @@ class PosController extends Component
         $item = Cart::get($productId);
         Cart::remove($productId);
 		$newQty = ($item->quantity) - 1;
-        if($newQty > 0)
-        
+        if($newQty > 0)        
             Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
-
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->dispatch('scan-ok', 'Cantidad Actualizada');       
     }
+
+
     public function clearCart()
 	{
 		Cart::clear();
@@ -198,6 +215,12 @@ class PosController extends Component
         $this->dispatch('scan-ok', 'Carrito vacio');
 	}
 
+    public function clearCoins()
+	{
+		$this->efectivo = 0;
+        $this->change = 0;
+       
+	}
     public function saveSale()
 	{
 		if ($this->total <= 0) {
@@ -242,13 +265,11 @@ class PosController extends Component
 					]);
 
 					//update stock
-					$product = Product::find($item->id);  // abrimos una variable en esa variable asigna la busqueda del producto //rescata el id del producto
+					$product = Product::find($item->id);  // abrimos una variable, en esa variable asigna la busqueda del producto //rescata el id del producto
 					$product->stock = $product->stock - $item->quantity;//actualiza el stok restando lo q esta saliendo
 					$product->save();
 				}
 			}
-
-
 			DB::commit(); //conformamos la transaccion el la base de datos
 
 			//$this->printTicket($sale->id);

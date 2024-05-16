@@ -21,9 +21,6 @@
 
 </div>
 
-
-
-
 </div>
 
 <script src="{{ asset('js/keypress.js') }}"></script>

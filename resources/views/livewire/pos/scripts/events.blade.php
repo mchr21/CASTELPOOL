@@ -12,10 +12,10 @@
         window.Livewire.on('scan-notfound', Msg => { //evento cuando no 	encontramos el prod a en la bd	
             
             noty(Msg, 2) //para que pase msj de tipo alert warning
-            console.log('Mensaje a mostrar:', msg); // Imprimir el mensaje que se va a mostrar
-    toastr.success(msg);
+          //  console.log('Mensaje a mostrar:', msg); // Imprimir el mensaje que se va a mostrar
+          //  toastr.success(msg);
 
-            doAction()
+          //  doAction()
         })
 
         window.Livewire.on('no-stock', Msg => {
@@ -68,7 +68,7 @@
     })
 </script>
 
-
+{{-- 
 <script>
 
 
@@ -111,4 +111,4 @@
 
 
     // console.log(getBrowser())
-</script>
+</script> --}}
