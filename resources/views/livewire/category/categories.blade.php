@@ -108,12 +108,21 @@
 
             window.Livewire.on('category-added', msg => {
             $('#theModal').modal('hide') ; 
+            noty(msg); 
     //         console.log('Mensaje a mostrar:', msg); // Imprimir el mensaje que se va a mostrar
     // toastr.success(msg);
         });
 
+        window.Livewire.on('category-deleted', msg => {
+            noty(msg, 2)
+        })
+
+
+
+
         window.Livewire.on('category-updated', msg =>{
 			$('#theModal').modal('hide')
+            noty(msg); 
 		});
 
         

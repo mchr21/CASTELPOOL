@@ -86,29 +86,43 @@
 
         window.Livewire.on('product-added', msg => {
             $('#theModal').modal('hide')
-        });
+            noty(msg); 
+            
+        })
+
+        window.Livewire.on('scan-ok',
+        Msg => { //	usamos para capturar todas las operaciones de ok en cuanto al codigo de barras se refiere
+            noty(Msg) // le mandamos el mensaje que nos devuelne el backend dentro del ecvento
+        })
+
+
+
+
         window.Livewire.on('product-updated', msg => {
             $('#theModal').modal('hide')
-        });
+            noty(msg); 
+        })
         window.Livewire.on('product-deleted', msg => {
-            // noty
-        });
+            noty(msg, 2)
+        })
         window.Livewire.on('modal-show', msg => {
             $('#theModal').modal('show')
-        });
+        })
         window.Livewire.on('modal-hide', msg => {
             $('#theModal').modal('hide')
-        });
+        })
         window.Livewire.on('hidden.bs.modal', msg => {
             $('.er').css('display', 'none')
-        });
+        })
 
         $('#theModal').on('hidden.bs.modal', function(e){
             $('.er').css('display', 'none')
-        });
+        })
+        $('#theModal').on('shown.bs.modal', function(e) {
+			$('.product-name').focus()
+		})
         
-        
-    });
+    })
 
 
 

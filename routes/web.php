@@ -6,6 +6,7 @@ use App\Livewire\CategoriesController;
 use App\Livewire\CoinsController;
 use App\Livewire\PosController;
 use App\Livewire\ProductsController;
+use App\Livewire\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::get('categories', CategoriesController::class);
 Route::get('products', ProductsController::class);
 Route::get('coins', CoinsController::class);
 Route::get('pos', PosController::class);
+Route::get('roles', RolesController::class);

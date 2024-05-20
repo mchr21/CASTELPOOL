@@ -187,7 +187,9 @@ class ProductsController extends Component
 	}
 
 	protected $listeners = [
-		'deleteRow' => 'Destroy'
+		'deleteRow' => 'Destroy', 
+		
+		
 	];
 
 
