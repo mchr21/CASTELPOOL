@@ -158,6 +158,8 @@ class CoinsController extends Component
     	$this->image = null;
     	$this->search ='';
     	$this->selected_id =0;
+	
+
     }
 
 

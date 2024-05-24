@@ -90,7 +90,7 @@ class ProductsController extends Component
 		]);
 
        // dd($product);
-        $customFileName;
+    ////////////////////////////    $customFileName;
 		if ($this->image) {
 			$customFileName = uniqid() . '_.' . $this->image->extension();
 			$this->image->storeAs('public/products', $customFileName);
@@ -183,7 +183,8 @@ class ProductsController extends Component
 		$this->categoryid = 'Elegir';
 		$this->image = null;
 		$this->selected_id = 0;
-		//$this->resetValidation();
+		$this->resetValidation();
+		$this->resetPage();
 	}
 
 	protected $listeners = [

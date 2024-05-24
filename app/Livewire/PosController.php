@@ -17,6 +17,7 @@ class PosController extends Component
 {
     //===========1==========
     public $total, $itemsQuantity, $efectivo, $change;
+    
 
     //===========4=========
     public function mount()
@@ -144,6 +145,7 @@ if($value == 0 ){
         // cuando se usa el metodo add internamente valida si el producto existe
         //si no exite lo crea y si exite lo actualiza la cantidad
         Cart::add($product->id, $product->name, $product->price,$cant, $product->image);
+    
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity(); //muestra el total de productos 
         $this->dispatch('scan-ok', $title);
@@ -194,15 +196,28 @@ if($value == 0 ){
     	// decrementar cantidad item en carrito
 	public function decreaseQty($productId)
 	{
+
+        $product = Product::find($productId);
         $item = Cart::get($productId);
         Cart::remove($productId);
 		$newQty = ($item->quantity) - 1;
-        if($newQty > 0)        
-            Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
+        if($newQty > 0){
+            $imageExists = $product->image;
+            if ($imageExists != null) {          
+                Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
+            }
+            else{
+                Cart::add($item->id, $item->name, $item->price, $newQty, $item->null); 
+            }
+        }         
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->dispatch('scan-ok', 'Cantidad Actualizada');       
     }
+
+
+
+
 
 
     public function clearCart()

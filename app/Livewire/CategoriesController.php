@@ -145,6 +145,11 @@ class CategoriesController extends Component
 		$this->image = null;
 		$this->search ='';
 		$this->selected_id =0;
+		$this->resetValidation();
+		$this->resetPage();
+
+
+
 	 }
 
 	 protected $listeners = ['deleteRow' => 'Destroy'];

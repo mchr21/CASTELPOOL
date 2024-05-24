@@ -114,6 +114,6 @@ class RolesController extends Component
         $this->roleName = '';
         $this->search = '';
         $this->selected_id = 0;
-        $this->resetValidation();
+        $this->resetValidation(); //limpia los mensajes
     }
 }

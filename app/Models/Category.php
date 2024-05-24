@@ -17,12 +17,27 @@ class Category extends Model
 	}
 
 //Accessor
+
+// public function getImagenAttribute()
+// 	{
+
+
+// 		if($this->image != null)
+// 			return (file_exists('storage/denominations/' . $this->image) ? 'denominations/' . $this->image : 'noimg.jpg');
+// 		else
+// 			return 'noimg.jpg';	
+		
+		
+// 	}
+
+
 public function getImagenAttribute()
 	{
 	
+		
 
 		if($this->image != null)
-			return (file_exists('storage/categories/' . $this->image) ? $this->image : 'noimg.jpg');
+			return (file_exists('storage/categories/' . $this->image) ? 'categories/' .  $this->image : 'noimg.jpg');
 		else
 			return 'noimg.jpg';		
 

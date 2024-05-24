@@ -48,4 +48,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //Accessor
+    public function getImagenAttribute()
+	{
+		if($this->image != null)
+			return (file_exists('storage/users/' . $this->image) ? 'users/' . $this->image : 'noimg.jpg');
+		else
+			return 'noimg.jpg';	
+		
+		
+	}
 }

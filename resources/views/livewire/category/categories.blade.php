@@ -24,8 +24,8 @@
                         <thead class="text-white" style="background: #3B3F5C">
                             <tr>
                                 <th class="table-th text-white">DESCRIPCIÓN</th>
-                                <th class="table-th text-white">IMAGEN</th>
-                                <th class="table-th text-white">ACTIONS</th>
+                                <th class="table-th text- text-center">IMAGEN</th>
+                                <th class="table-th text-white text-center">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,7 +36,7 @@
                                     </td>
                                     <td class="text-center">
                                      <span>
-                                        <img src="{{ asset('storage/categories/' . $category->imagen) }}"
+                                        <img src="{{ asset('storage/' . $category->imagen) }}"
                                         alt="imagen de ejemplo" height="70" width="80" class="rounded">
                                     </span>
                                     </td>
