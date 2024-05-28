@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\AsignarController;
+use App\Livewire\CashoutController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\CategoriesController;
@@ -38,5 +39,6 @@ Route::get('roles', RolesController::class);
 Route::get('permisos', PermisosController::class);
 Route::get('asignar', AsignarController::class);
 Route::get('users', UsersController::class);
+Route::get('cashout', CashoutController::class);
 
 

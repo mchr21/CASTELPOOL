@@ -136,6 +136,7 @@
         }).then(function(result) {
             if(result.value){
                 window.Livewire.dispatch('revokeall')
+                
                 swal.close()
             }
 
