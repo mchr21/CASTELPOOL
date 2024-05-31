@@ -20,7 +20,7 @@
                                     </span>
                                 </span>
                             </div>
-                            <input type="text" wire:model.lazy="permissionName" class="form-control"
+                            <input type="text" wire:model.blur="permissionName" class="form-control"
                                 placeholder="ej: Category_Index" maxlength="255">
                         </div>
                         @error('permissionName')

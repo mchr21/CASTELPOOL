@@ -12,7 +12,7 @@
 				</span>
 			</span>
 		</div>
-		<input id="editIcon" type="text" wire:model.blur="name" class="form-control" placeholder="ej: Cursos" maxlength="255">
+		<input id="editIcon" type="text" wire:model.live.blur="name" class="form-control" placeholder="ej: Cursos" maxlength="255">
 	</div>
 	@error('name') <span class="text-danger er">{{ $message }}</span> @enderror
 </div>

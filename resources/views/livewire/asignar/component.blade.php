@@ -12,7 +12,7 @@
             <div class="widget-content">
                 <div class="form-inline">
                     <div class="form-group mr-5">
-                        <select wire:model ="role" class="form-control">
+                        <select wire:model.live ="role" class="form-control">
                             
                             <option value="Elegir" selected>== Selecciona el Role ==</option>
                             @foreach($roles as $role)

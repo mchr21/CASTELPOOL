@@ -20,7 +20,7 @@
                                     </span>
                                 </span>
                             </div>
-                            <input type="text" wire:model.lazy="roleName" class="form-control"
+                            <input type="text" wire:model.blur="roleName" class="form-control"
                                 placeholder="ej: Admin" maxlength="255">
                         </div>
                         @error('roleName')
