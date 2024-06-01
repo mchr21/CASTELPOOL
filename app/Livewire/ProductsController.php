@@ -91,6 +91,7 @@ class ProductsController extends Component
 
        // dd($product);
     ////////////////////////////    $customFileName;
+	$customFileName;
 		if ($this->image) {
 			$customFileName = uniqid() . '_.' . $this->image->extension();
 			$this->image->storeAs('public/products', $customFileName);
@@ -100,6 +101,9 @@ class ProductsController extends Component
 
 		$this->resetUI();
 		$this->dispatch('product-added', 'Producto Registrado');
+
+
+		
 	}
 
     public function Edit(Product $product)
