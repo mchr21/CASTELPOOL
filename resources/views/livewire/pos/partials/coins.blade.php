@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row">
                     @foreach ($denominations as $d)
-                        <div class="col-sm-3 mt-1">
+                        <div class="col-sm-4 mt-1">
                             {{-- <div class="col-sm-6 col-md-3 mt-2"> --}}
 
                             <button wire:click.prevent="ACash({{ $d->value }})" class="btn btn-dark btn-block den ">

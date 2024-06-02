@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use App\Livewire\AsignarController;
 use App\Livewire\CashoutController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use App\Livewire\CoinsController;
 use App\Livewire\PermisosController;
 use App\Livewire\PosController;
 use App\Livewire\ProductsController;
+use App\Livewire\ReportsController;
 use App\Livewire\RolesController;
 use App\Livewire\UsersController;
 
@@ -40,6 +42,14 @@ Route::get('permisos', PermisosController::class);
 Route::get('asignar', AsignarController::class);
 Route::get('users', UsersController::class);
 Route::get('cashout', CashoutController::class);
+Route::get('reports', ReportsController::class);
+
+//reportes PDF
+Route::get('report/pdf/{user}/{type}/{f1}/{f2}',[ExportController::class, 'reportPDF']);
+Route::get('report/pdf/{user}/{type}',[ExportController::class, 'reportPDF']);
+
+//Reportes Excel
+
 
 
 

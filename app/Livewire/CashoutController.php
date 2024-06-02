@@ -5,7 +5,9 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Sale;
+use App\Models\SaleDetail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use SebastianBergmann\Environment\Console;
 
 class CashoutController extends Component
@@ -58,18 +60,31 @@ class CashoutController extends Component
 
 
 
-       $this->details = Sale::join('sale_details as d','d.sale_id','sales.id')
-       ->join('products as p','p.id','d.product_id')
-       ->select('d.sale_id','p.name as product','d.quantity','d.price')
-       ->whereBetween('sales.created_at', [$fi, $ff])
-       ->where('sales.status', 'Paid')
-       ->where('sales.user_id', $this->userid)
-       ->where('sales.id', $sale->id)
-       ->get();
+    //    $this->details = Sale::join('sale_details as d','d.sale_id','sales.id')
+    //    ->join('products as p','p.id','d.product_id')
+    //    ->select('d.sale_id','p.name as product','d.quantity','d.price')
+    //    ->whereBetween('sales.created_at', [$fi, $ff])
+    //    ->where('sales.status', 'Paid')
+    //    ->where('sales.user_id', $this->userid)
+    //    ->where('sales.id', $sale->id)
+    //    ->get();
+    // //   
        
 
-      $this->dispatch('close-modal', 'close modal'); 
-       $this->dispatch('show-modal','open modal');
+    $this->details = DB::table('sales')
+    ->join('sale_details as d', 'd.sale_id', '=', 'sales.id')
+    ->join('products as p', 'p.id', '=', 'd.product_id')
+    ->select('d.sale_id', 'p.name as product', 'd.quantity', 'd.price')
+    ->where([
+        ['sales.status', '=', 'Paid'],
+        ['sales.user_id', '=', $this->userid],
+        ['sales.id', '=', $sale->id]
+    ])
+    ->whereBetween('sales.created_at', [$fi, $ff])
+    ->get();
+     // $this->dispatch('close-modal', 'close modal'); 
+       $this->dispatch('show-modal','show modal');
+    
        
 
    }

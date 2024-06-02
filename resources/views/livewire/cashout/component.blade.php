@@ -125,19 +125,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         window.Livewire.on('show-modal', Msg => {
             $('#modal-details').modal('show')
-            // console.log({{ $fromDate }});
+          //  console.log('Mensaje a mostrar:', Msg);
         })
-        window.Livewire.on('close-modal', () => {
-            $('#modal-details').modal('hide'); // Cierra la modal
-        })
+        // window.Livewire.on('close-modal', () => {
+        //     $('#modal-details').modal('hide'); // Cierra la modal
+        // })
         
 
     })
-    document.addEventListener('livewire:load', function() {
-    Livewire.onError(statusCode => {
-        console.log('Livewire error status code:', statusCode);
-        // Puedes manejar el error aquí
-        return false;
-    });
-});
+   
 </script>

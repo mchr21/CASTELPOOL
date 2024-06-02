@@ -20,7 +20,7 @@
 <script>
     function noty(msg, option = 1) {
         Snackbar.show({
-          //  text: msg.toUpperCase(),
+            //  text: msg.toUpperCase(),
             text: msg.toString().toUpperCase(),
             actionText: 'CERRAR',
             actionTextColor: '#fff',
@@ -30,4 +30,5 @@
     }
     
 </script>
+<script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
 @livewireScripts

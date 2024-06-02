@@ -29,7 +29,7 @@
     aside {
         display: none !important;
     }
-
+    
     .page-item.active .page-link {
         z-index: 3;
         color: #fff;
@@ -37,51 +37,52 @@
         border-color: #3b3f5c;
     }
     @media (max-width: 480px) {
-		.mtmobile {
-			margin-bottom: 20px !important;
+        .mtmobile {
+            margin-bottom: 20px !important;
 		}
-
+        
 		.mbmobile {
-			margin-bottom: 10px !important;
+            margin-bottom: 10px !important;
 		}
-
+        
 		.hideonsm {
-			display: none !important;
+            display: none !important;
 		}
-
+        
 		.inblock {
-			display: block;
+            display: block;
 		}
 	}
-/* sidebar background */
+    /* sidebar background */
 	.sidebar-theme #compactSidebar {
-    background: #191e3a !important;
-}
-/* sidebar Collapse  background*/
-.header-container .sidebarCollapse {
-    color: #3B3F5C !important;	
-}
-.navbar .navbar-item .nav-item form.form-inline input.search-form-control {
-    font-size: 15px;
-    background-color: #3B3F5C !important;
-    padding-right: 40px;
-    padding-top: 12px;
-    border: none;
-    color: #fff!important;
-    box-shadow: none;
-    border-radius: 30px;
-}
-
-.navbar .navbar-item .nav-item.search-animated svg {
-    cursor: pointer;
-    color: #ffffffb4!important;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 10px;
-    right: 10px;
-}
-
-
+        background: #191e3a !important;
+    }
+    /* sidebar Collapse  background*/
+    .header-container .sidebarCollapse {
+        color: #3B3F5C !important;	
+    }
+    .navbar .navbar-item .nav-item form.form-inline input.search-form-control {
+        font-size: 15px;
+        background-color: #3B3F5C !important;
+        padding-right: 40px;
+        padding-top: 12px;
+        border: none;
+        color: #fff!important;
+        box-shadow: none;
+        border-radius: 30px;
+    }
+    
+    .navbar .navbar-item .nav-item.search-animated svg {
+        cursor: pointer;
+        color: #ffffffb4!important;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    
 </style>
+<link href="{{ asset('plugins/flatpickr/flatpickr.dark.css') }}" rel="stylesheet" type="text/css" />
 @livewireStyles
