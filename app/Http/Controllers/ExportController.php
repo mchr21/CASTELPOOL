@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SalesExport;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use App\Models\Sale;
@@ -70,11 +71,11 @@ class ExportController extends Controller
     }
 
 
-    // public function reporteExcel($userId, $reportType, $dateFrom =null, $dateTo =null)
-    // {
-    //     $reportName = 'Reporte de Ventas_' . uniqid() . '.xlsx';
+    public function reporteExcel($userId, $reportType, $dateFrom =null, $dateTo =null)
+    {
+        $reportName = 'Reporte de Ventas_' . uniqid() . '.xlsx';
         
-    //     return Excel::download(new SalesExport($userId, $reportType, $dateFrom, $dateTo),$reportName );
-    // }
+        return Excel::download(new SalesExport($userId, $reportType, $dateFrom, $dateTo),$reportName );
+    }
 
 }

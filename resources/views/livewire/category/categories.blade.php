@@ -8,14 +8,20 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
+                        @can('Category_Create')
+
                         <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal"
-                            data-target="#theModal">Agregar</a>
-                    </li>
+                        data-target="#theModal">Agregar</a>
+                    @endcan
+                        </li>
                 </ul>
             </div>
             {{-- search --}}
+            @can('Category_Search')
             @include('common.searchbox')
 
+           
+            @endcan
 
             <div class="widget-content">
 
@@ -24,7 +30,7 @@
                         <thead class="text-white" style="background: #3B3F5C">
                             <tr>
                                 <th class="table-th text-white">DESCRIPCIÓN</th>
-                                <th class="table-th text- text-center">IMAGEN</th>
+                                <th class="table-th text-white text- text-center">IMAGEN</th>
                                 <th class="table-th text-white text-center">ACTIONS</th>
                             </tr>
                         </thead>
@@ -43,18 +49,23 @@
                               
 
                                     <td class="text-center">
+                                        @can('Category_Update')
+                                        
                                         <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})"
                                             class="btn btn-dark mtmobile" title="Edit" >
                                             <i class="fas fa-edit"></i>
-                                        </a>
-
+                                            </a>
+                                            @endcan
+                                            
 
                                        @if($category->products->count() < 1)
-                                        
-                                        <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}', '{{$category->products->count()}} ')"
-                                            class="btn btn-dark" title="Delete">
-                                            <i class="fas fa-trash"></i>
+                                       @can('Category_Destroy')
+                                       
+                                       <a href="javascript:void(0)" onclick="Confirm('{{ $category->id }}', '{{$category->products->count()}} ')"
+                                        class="btn btn-dark" title="Delete">
+                                        <i class="fas fa-trash"></i>
                                         </a>
+                                    @endcan
                                         
                                        @endif
                                        {{-- {{$category->products->count()}} 

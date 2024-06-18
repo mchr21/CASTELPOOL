@@ -8,13 +8,17 @@
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
+                        @can('Product_Create')
                         <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal"
                             data-target="#theModal">Agregar</a>
+                            @endcan
                     </li>
                 </ul>
             </div>
             {{-- search --}}
+            @can('Product_Search')
             @include('common.searchbox')
+            @endcan
 
             <div class="widget-content">
 
@@ -38,8 +42,11 @@
                                     <td> <h6 class="text-left">{{ $product->name }}</h6></td>
                                     <td><h6 class="text-center">{{ $product->barcode }}</h6></td>
                                     <td><h6 class="text-center">{{ $product->category }}</h6></td>
-                                    <td><h6 class="text-center">{{ $product->price }}</h6></td>
-                                    <td><h6 class="text-center">{{ $product->stock }}</h6></td>
+                                    <td><h6 class="tet-center">{{ $product->price }}</h6></td>
+
+                                    <td><h6 class="text-center {{ $product->stock <= $product->alerts ? 'text-danger font-weight-bold ' : '' }}">{{$product->stock}}</h6></td>
+
+
                                     <td><h6 class="text-center">{{ $product->alerts }}</h6></td>
                                     <td class="text-center">
                                         <span>
@@ -49,16 +56,20 @@
                                     </td>
 
                                     <td class="text-center">
+                                        @can('Product_Update')
                                         <a href="javascript:void(0)" wire:click="Edit({{ $product->id }})"
                                             class="btn btn-dark mtmobile" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
+                                        @endcan
+
+                                        @can('Product_Destroy')
 
                                         <a href="javascript:void(0)" onclick="Confirm('{{ $product->id }}')"
                                             class="btn btn-dark" title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </a>
-
+                                            @endcan
 
                                     </td>
                                 </tr>

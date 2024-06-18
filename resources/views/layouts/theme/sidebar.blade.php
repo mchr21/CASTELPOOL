@@ -5,7 +5,8 @@
 
         <ul class="menu-categories">
 
-            {{-- @role('Admin') --}}
+            @role('Administrador')
+            @can('Category_Index')
                 <li class="active">
                     <a href="{{ url('categories') }}" class="menu-toggle" data-active="true">
                         <div class="base-menu">
@@ -23,7 +24,8 @@
                         </div>
                     </a>
                 </li>
-            {{-- @endcan --}}
+            @endcan
+            @endcan
 
 
 

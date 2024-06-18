@@ -169,7 +169,7 @@ public function Update()
         'email' => $this->email,
         'phone' => $this->phone,
         'status' => $this->status,
-        'profile' => $this->profile,
+        'profile' => $this->profile, 
         'password' => strlen($this->password) > 0 ? bcrypt($this->password) : $user->password
     ]);
     
